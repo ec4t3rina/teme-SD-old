@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cassert>
+#include <ranges>
+
+void bubble_sort(std::vector<int>& a) {
+    int n = a.size(), last, idxmax;
+
+    idxmax = n-1;
+    for (int i = 0; i < n - 1; i++) {
+        last = 0;
+        for (int j = 0; j < idxmax; j++)
+            if (a[j] > a[j + 1]) {
+                std::swap(a[j], a[j + 1]);
+                last = j;
+            }
+        idxmax = last;
+    }
+}
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    int n;
+    std::cin >> n;
+    std::vector<int> a(n);
+    for (int& x : a) {
+        std::cin >> x;
+    }
+    bubble_sort(a);
+    assert(std::ranges::is_sorted(a));
+    return 0;
+}
